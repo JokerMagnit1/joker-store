@@ -27,26 +27,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (payBtn) {
     payBtn.addEventListener("click", () => {
-      const address = document.getElementById("address").value;
+  const address = document.getElementById("address").value;
 
-      if (!address.trim()) {
-        alert("📦 Пожалуйста, введите адрес доставки.");
-        return;
-      }
+  if (!address.trim()) {
+    alert("📦 Пожалуйста, введите адрес доставки.");
+    return;
+  }
 
-      const message = {
-        total,
-        items: cart.map(x => x.name),
-        address,
-      };
+  const message = {
+    total,
+    items: cart.map(x => x.name),
+    address,
+  };
 
-      if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.sendData(JSON.stringify(message));
-      } else {
-        alert("❗ WebApp не запущен в Telegram. Открой магазин через Telegram-бота.");
-        console.warn("Telegram.WebApp не найден");
-      }
-    });
+  // 👇 ВСТАВЬ alert СЮДА
+  alert("✅ Кнопка сработала! Отправка данных...");
+
+  if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+    Telegram.WebApp.sendData(JSON.stringify(message));
+  } else {
+    alert("❗ WebApp не запущен в Telegram. Открой магазин через Telegram-бота.");
+    console.warn("Telegram.WebApp не найден");
+  }
+});
   } else {
     console.error("🚫 Кнопка с id='payBtn' не найдена в DOM");
   }
