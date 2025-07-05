@@ -23,9 +23,11 @@ items.forEach(item => {
 });
 
 document.getElementById("payBtn").addEventListener("click", () => {
+  const address = document.getElementById("address").value;
   const message = {
     total,
     items: cart.map(x => x.name),
+    address,
   };
   Telegram.WebApp.sendData(JSON.stringify(message));
 });
